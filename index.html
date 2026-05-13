@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>晨光碳烤 — 職人炭烤吐司早餐</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --warm-white: #faf8f5;
+      --cream: #f5efe6;
+      --orange: #e67e22;
+      --orange-dark: #d35400;
+      --brown: #5d4e37;
+      --brown-light: #8b7355;
+      --text: #3d3022;
+      --gray: #888;
+      --border: #e8e0d4;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--warm-white); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(250,248,245,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; color: var(--orange); text-decoration: none; letter-spacing: 0.05em; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-cta { background: var(--orange); color: var(--warm-white) !important; padding: 9px 22px; border-radius: 100px; font-size: 13px !important; font-weight: 600 !important; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--orange-dark); }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; background: var(--cream); padding: 0 48px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; left: -100px; top: -100px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(230,126,34,0.1) 0%, transparent 70%); border-radius: 50%; }
+    .hero-content { flex: 1; max-width: 560px; padding: 120px 0; position: relative; z-index: 1; }
+    .hero-badge { display: inline-block; background: rgba(230,126,34,0.1); color: var(--orange); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; }
+    .hero h1 { font-family: 'Noto Serif TC', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 700; line-height: 1.2; color: var(--text); margin-bottom: 20px; }
+    .hero h1 em { font-style: normal; color: var(--orange); }
+    .hero-sub { font-size: 16px; color: var(--brown-light); font-weight: 300; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { background: var(--orange); color: var(--warm-white); padding: 14px 32px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.2s; }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+    .btn-outline { border: 1.5px solid var(--orange); color: var(--orange); padding: 14px 32px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-outline:hover { background: rgba(230,126,34,0.08); }
+    .hero-img-col { flex: 1; display: flex; justify-content: center; align-items: center; padding: 120px 0; }
+    .hero-img { width: 100%; max-width: 480px; aspect-ratio: 4/5; object-fit: cover; border-radius: 24px; box-shadow: 0 40px 80px rgba(93,78,55,0.15); }
+
+    .marquee-strip { background: var(--orange); padding: 12px 0; overflow: hidden; }
+    .marquee-track { display: flex; gap: 60px; animation: marquee 25s linear infinite; white-space: nowrap; }
+    .marquee-strip span { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.85); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .menu-section { padding: 100px 48px; background: var(--warm-white); }
+    .section-header { max-width: 1100px; margin: 0 auto 64px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .section-header h2 { font-family: 'Noto Serif TC', serif; font-size: 36px; font-weight: 700; color: var(--text); }
+    .section-header p { font-size: 15px; color: var(--gray); margin-top: 8px; }
+
+    .menu-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .menu-card { background: var(--cream); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(93,78,55,0.08); }
+    .menu-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+    .menu-card-body { padding: 24px; }
+    .menu-card h3 { font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .menu-card p { font-size: 13px; color: var(--gray); margin-bottom: 16px; }
+    .menu-price { font-size: 20px; font-weight: 700; color: var(--orange); }
+    .menu-price small { font-size: 12px; font-weight: 400; color: var(--gray); margin-left: 4px; }
+
+    .story { background: var(--orange); padding: 80px 48px; }
+    .story-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .story h2 { font-family: 'Noto Serif TC', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: var(--warm-white); margin-bottom: 24px; }
+    .story p { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.9; max-width: 640px; margin: 0 auto 32px; }
+    .btn-white { background: var(--warm-white); color: var(--orange); padding: 14px 32px; border-radius: 100px; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-white:hover { background: var(--cream); transform: translateY(-1px); }
+
+    .locations { padding: 100px 48px; background: var(--cream); }
+    .locations-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .location-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
+    .location-card h3 { font-family: 'Noto Serif TC', serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .location-card p { font-size: 14px; color: var(--gray); margin-bottom: 4px; }
+    .location-status { margin-top: 16px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+    .cta-band { background: var(--warm-white); border-top: 1px solid var(--border); padding: 80px 48px; text-align: center; }
+    .cta-band h2 { font-family: 'Noto Serif TC', serif; font-size: clamp(24px, 4vw, 40px); font-weight: 700; color: var(--text); margin-bottom: 16px; }
+    .cta-band p { font-size: 16px; color: var(--gray); margin-bottom: 32px; }
+
+    footer { background: var(--text); padding: 48px 48px 24px; }
+    .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-brand .nav-logo { font-size: 24px; display: inline-block; margin-bottom: 12px; color: var(--orange); }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.8; }
+    .footer-col h4 { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 16px; font-weight: 600; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--orange); }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 12px; color: rgba(255,255,255,0.3); display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      nav { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .hero { flex-direction: column; padding: 0 24px; }
+      .hero-content { padding: 120px 0 40px; }
+      .hero-img-col { padding: 0 0 60px; }
+      .menu-grid, .locations-grid { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; gap: 12px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">晨光碳烤</a>
+  <ul class="nav-links">
+    <li><a href="#menu">菜單</a></li>
+    <li><a href="#story">品牌故事</a></li>
+    <li><a href="#locations">據點</a></li>
+    <li><a href="#order" class="nav-cta">線上預訂</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">☀️ 職人炭烤・在地早餐</div>
+    <h1>一份炭烤吐司<br><em>喚醒一天的元氣</em></h1>
+    <p class="hero-sub">木炭高溫炭烤，酥脆吐司夾入當日現宰溫體豬。每一份早餐，都是阿嬤傳承 40 年的味道。</p>
+    <div class="hero-actions">
+      <a href="#order" class="btn-primary">線上預訂</a>
+      <a href="#menu" class="btn-outline">查看菜單</a>
+    </div>
+  </div>
+  <div class="hero-img-col">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=800&q=80" alt="炭烤吐司早餐">
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>☀️ 木炭炭烤 &nbsp;&nbsp;🥩 溫體豬肉 &nbsp;&nbsp;🍞 手工厚片 &nbsp;&nbsp;🥚 放牧雞蛋 &nbsp;&nbsp;📍 全台 12 店 &nbsp;&nbsp;☕ 職人咖啡</span>
+    <span>☀️ 木炭炭烤 &nbsp;&nbsp;🥩 溫體豬肉 &nbsp;&nbsp;🍞 手工厚片 &nbsp;&nbsp;🥚 放牧雞蛋 &nbsp;&nbsp;📍 全台 12 店 &nbsp;&nbsp;☕ 職人咖啡</span>
+  </div>
+</div>
+
+<section class="menu-section" id="menu">
+  <div class="section-header">
+    <div>
+      <h2>招牌餐點</h2>
+      <p>木炭直火烤，手工現做</p>
+    </div>
+    <a href="#" style="color:var(--orange);font-size:14px;font-weight:600;text-decoration:none;">完整菜單 →</a>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=80" alt="炭烤豬肉三明治">
+      <div class="menu-card-body">
+        <h3>炭烤豬肉三明治</h3>
+        <p>溫體豬五花炭烤，搭配特製花生醬與生菜</p>
+        <div class="menu-price">NT$ 75 <small>/ 份</small></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=80" alt="炭烤蛋餅">
+      <div class="menu-card-body">
+        <h3>炭烤蛋餅</h3>
+        <p>手工蛋餅皮炭烤酥脆，夾入蔥花蛋與起司</p>
+        <div class="menu-price">NT$ 55 <small>/ 份</small></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="炭烤雞腿排">
+      <div class="menu-card-body">
+        <h3>炭烤雞腿排吐司</h3>
+        <p>超大雞腿排炭烤至金黃，配特製蔥鹽醬</p>
+        <div class="menu-price">NT$ 85 <small>/ 份</small></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" alt="職人美式咖啡">
+      <div class="menu-card-body">
+        <h3>職人美式咖啡</h3>
+        <p>中烘培阿拉比卡，新鮮現磨現沖</p>
+        <div class="menu-price">NT$ 45 <small>/ 杯</small></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="鮮奶茶">
+      <div class="menu-card-body">
+        <h3>牧場鮮奶茶</h3>
+        <p>100% 鮮乳加高山紅茶，濃郁順口</p>
+        <div class="menu-price">NT$ 50 <small>/ 杯</small></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80" alt="黃金流沙包">
+      <div class="menu-card-body">
+        <h3>黃金流沙包</h3>
+        <p>每日限量，手工現做，金沙蛋黃餡</p>
+        <div class="menu-price">NT$ 40 <small>/ 顆</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-inner">
+    <h2>40 年，只為做好一份吐司</h2>
+    <p>1986 年，阿嬤在雲林西螺的菜市場路邊擺攤，用一只炭火爐烤出第一批吐司。那時候沒有包裝，沒有行銷，靠的是真材實料的口碑。</p>
+    <p>現在的晨光碳烤，在全台已有 12 家分店。但我們依然每天清晨 4 點生炭火、6 點開門，用同一個阿嬤的配方，烤出那一份喚醒一天的味道。</p>
+    <a href="#" class="btn-white">了解我們的故事 →</a>
+  </div>
+</section>
+
+<section class="locations" id="locations">
+  <div class="locations-grid">
+    <div class="location-card">
+      <h3>台北・公館店</h3>
+      <p>台北市大安區羅斯福路四段 88 號</p>
+      <p>捷運公館站 1 號出口步行 3 分鐘</p>
+      <p>06:30 - 14:00（週一至週六）</p>
+      <div class="location-status"><span class="status-dot"></span><span style="color:#4ade80">營業中</span></div>
+    </div>
+    <div class="location-card">
+      <h3>台北・南港店</h3>
+      <p>台北市南港區研究院路一段 88 號</p>
+      <p>捷運南港站步行 5 分鐘</p>
+      <p>06:30 - 14:00（週一至週六）</p>
+      <div class="location-status"><span class="status-dot"></span><span style="color:#4ade80">營業中</span></div>
+    </div>
+    <div class="location-card">
+      <h3>新北・板橋店</h3>
+      <p>新北市板橋區中山路一段 168 號</p>
+      <p>捷運府中站步行 4 分鐘</p>
+      <p>06:30 - 13:30（週一至週六）</p>
+      <div class="location-status"><span class="status-dot" style="background:#facc15"></span><span style="color:#facc15">明日 06:30</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band" id="order">
+  <h2>今天想來一份晨光？</h2>
+  <p>線上預訂，減少等待時間，到店直接取餐</p>
+  <a href="#" class="btn-primary">線上預訂早餐 →</a>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">晨光碳烤</a>
+      <p>40 年職人炭烤吐司，阿嬤的味道。用一只炭火爐，喚醒每一天的早晨。</p>
+    </div>
+    <div class="footer-col">
+      <h4>餐點</h4>
+      <ul>
+        <li><a href="#">炭烤三明治</a></li>
+        <li><a href="#">蛋餅系列</a></li>
+        <li><a href="#">職人咖啡</a></li>
+        <li><a href="#">每日限定</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>聯絡</h4>
+      <ul>
+        <li><a href="mailto:morning@morningshop.tw">morning@morningshop.tw</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 晨光碳烤 Morning Charcoal. All rights reserved.</span>
+    <span>全台 12 店・線上預訂</span>
+  </div>
+</footer>
+
+</body>
+</html>
